@@ -1,0 +1,220 @@
+#include <iostream>
+//#include <string>
+using namespace std;
+
+//function to calculate square root by use of babylonian method
+double sqrt(double num1){
+    double x=num1;
+    double y=(x+1)/2;
+
+    while(y<x){
+        x=y;
+        y=(x+num1/x)/2;
+    }
+    return x;
+}
+//function to solve quadratic equation 
+void solvequadratic (double a,double b, double c){
+    double d =b*b-4*a*c;
+    if(d>0){
+        double root1=(-b+sqrt(d))/2*a;
+        double root2=(-b-sqrt(d))/2*a;
+        cout<<"roots"<<root1<<"and"<<root2<<endl;
+    }
+    else if (d==0){
+        double root= -b/(2*a);
+        cout<<"root "<<root<<endl;
+    }
+    else{
+        cout<<"no real root"<<endl;
+    }
+}
+
+//function to calculate power
+double power (double base, int exponent){
+    double result=1;
+    for(int i= 0; i<exponent; i++){
+        result*=base;
+    }
+    return result;
+}
+
+//fumction to calculate natural logarithm (ln)
+double ln(double x){
+    double sum=0;
+    int n=100;//number of term for approximation
+
+
+    for (int i=1; i<=n; i++){
+        sum+=power(-1,i+1)*power((x-1)/(x+1) , i)/i;
+    }
+        return 2*sum; }
+
+    //function to solve liner equation
+void solveLE() { 
+        double a1,b1,c1,a2,b2,c2;
+        cout<<"enter coefficient for equation 1 (ax + by + c) :"<<endl;
+        cout<<"enter a :";
+        cin>>a1;
+        cout<<"enter b :";
+        cin>>b1;
+        cout<<"enter c :";
+        cin>>c1;
+        cout<<"enter coefficient for equaton 2 (ax + by + c) :"<<endl;
+        cout<<"enter a :";
+        cin>>a2;
+        cout<<"enter b :";
+        cin>>b2;
+        cout<<"enter c :";
+        cin>>c2;
+
+        double determinant = a1*b2-a2*b1;
+
+        if (determinant!=0){
+            double x= (c1*b2-c2*b1)/determinant;
+            double y= (a1*c2-a2*c1)/determinant;
+            cout<<"solution : x="<<x<<" and y="<<y<<endl;
+        }
+        else {
+            cout<<"no uniqe solution"<<endl;
+        }
+   
+ }
+ //function to calculate factorial
+  double factorial(int n)
+  
+    {if (n==0){
+        return 1;
+    }
+    else{
+        return n*factorial(n-1);
+    }
+  }
+ 
+ //function to calculate sine
+ double sin(double x){
+double s=0;
+int n=100;//number of term for approximation
+for (int i=0; i<=n; i++){
+    s+=power(-1,i)*power(x,2*i+1)/factorial(2*i+1);
+}  return s;
+ }
+
+//function to calculate cosine
+ double cos(double x){
+double s=0;
+int n=100;//number of term for approximation
+for (int i=0; i<=n; i++){
+    s+=power(-1,i)*power(x,2*i)/factorial(2*i);
+}  return s;
+ }
+
+ //function to calculate tangent
+ double tan(double x){
+return sin(x)/cos(x);
+ }
+
+int main () {
+    double a,b ,c,d,g;
+    int e=2;
+    int f=4;
+    double x;
+    char operation;
+cout<<"enter operation(+,-,*,/,log(L),square(S),cube(C),)"<<endl;
+cout<<"Quadratic equatiion(Q), liner eq.(l)), sine(s), cosine(c), tangent(t)"<<endl;
+cin>>operation;
+
+if(operation=='+'){
+    cout<<"enter two number"<<endl;
+    cin>>a>>b;
+    cout<<a<<"+"<<b<<"="<<(a+b)<<endl;
+}
+else if(operation=='-'){
+    cout<<"enter two number"<<endl;
+    cin>>a>>b;
+    cout<<a<<"-"<<b<<"="<<(a-b)<<endl;
+}
+else if(operation=='*'){
+   cout<<"enter two number"<<endl;
+    cin>>a>>b;
+    cout<<a<<"*"<<b<<"="<<(a*b)<<endl;
+} 
+
+else if(operation=='/'){
+    cout<<"enter two number"<<endl;
+    cin>>a>>b;
+     cout<<a<<"/"<<b<<"="<<(a/b)<<endl;
+}
+else if(operation=='S'){
+    cout<<"enter number"<<endl;
+    cin>>a;
+     cout<<a<<"square"<<"="<<a*a<<endl;
+}
+else if(operation=='C'){
+    cout<<"enter number"<<endl;
+    cin>>a;
+     cout<<a<<"Cube"<<"="<<(a*a*a)<<endl;
+    }
+else if(operation=='L'){
+
+    cout<<"Enter a positive  number "<<endl;
+    cin>>a;
+     if(a>0){
+        double result = ln(a);
+        cout<<"natural logarithm(ln) of "<<a<<"="<<result<<endl;
+     }
+     else{
+        cout<<"input must be a positive number"<<endl;
+     }
+    }
+else if (operation=='Q'){
+    cout<<"quadratic eq. format = ax^2 + bx + c"<<endl;
+    cout<<"enter coefficients of x^2 (a)= " ;
+    cin>>a;
+cout<<"enter coefficients of x (b)= ";
+    cin>>b;
+    cout<<"enter constant term (C)= ";
+    cin>>c;
+    cout<<"roots of this eqation is "<<endl;
+     solvequadratic(a,b,c);
+
+}
+else if (operation=='l'){
+    solveLE();
+}
+ 
+ 
+    else if(operation=='s'){
+        cout<<"enter angle in radians :";
+        cin>>x;
+        cout<<"sine:"<<sin(x)<<endl;    
+    }
+
+     else if(operation=='c'){
+        cout<<"enter angle in radians :";
+        cin>>x;
+        cout<<"cosine:"<<cos(x)<<endl;    
+    }
+
+     else if(operation=='t'){
+        cout<<"enter angle in radians :";
+        cin>>x;
+        cout<<"tangent:"<<tan(x)<<endl;    
+    }
+
+
+    else{
+        cout<<"please enter valid operation"<<endl;
+    }
+
+    return 0 ;
+}
+
+
+
+
+
+
+
+
+
